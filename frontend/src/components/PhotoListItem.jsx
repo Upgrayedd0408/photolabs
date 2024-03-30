@@ -7,14 +7,14 @@ import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
 
-  const { id, imageSource, profile, username, location } = props.sampleDataForPhotoListItem;
+  const { id, imageSource, profile, username, location } = props.photoData;
 
   return (
     <div key={id}>
-      <img src = {imageSource} />
-      <img src = {profile} />
-      <h6>{username}</h6>
-      <h6>{location.city} {location.country}</h6>
+      <img src={imageSource} className="photo-list__item"/>
+      <img src={profile} className="photo-list__item" />
+      <span>{username}</span>
+      <span>{location.city} {location.country}</span>
     </div>
   );
 };
