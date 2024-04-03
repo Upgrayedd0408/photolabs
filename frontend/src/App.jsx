@@ -1,6 +1,7 @@
 import React from 'react';
 
-import PhotoListItem from './components/PhotoListItem';
+import TopicList from 'components/TopicList';
+import TopicListItem from 'components/TopicListItem';
 import PhotoList from 'components/PhotoList';
 import './App.scss';
 import { useState } from 'react';
@@ -11,6 +12,8 @@ import { useState } from 'react';
 const App = () => {
 
   const [fav, setFav] = useState(false);
+  const [currentTopic, setCurrentTopic] = useState();
+
   const favPhoto = () => {
     if (fav) {
       setFav(false);
@@ -19,11 +22,12 @@ const App = () => {
     }
   };
 
-  /* const photos = [...Array(3)];
-  const list = photos.map((photo, i) => <PhotoListItem key={i} photoData={sampleDataForPhotoListItem} fav={fav} favPhoto={favPhoto} />); */
+  
 
+  
   return (
     <div className="App">
+      <TopicList />
       <PhotoList fav={fav} favPhoto={favPhoto} />
     </div>
   );
