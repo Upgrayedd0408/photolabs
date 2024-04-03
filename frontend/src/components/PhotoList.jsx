@@ -60,7 +60,7 @@ const sampleDataForPhotoList = [
 const PhotoList = (props) => {
   const { fav, favPhoto } = props;
 
-  const list = sampleDataForPhotoList.map((photo, i) => <PhotoListItem key={i} photo={photo} fav={fav} favPhoto={favPhoto} />);
+  const list = sampleDataForPhotoList.map((photo) => <PhotoListItem key={photo.id} photo={photo} fav={fav} favPhoto={favPhoto} />);
 
   return (
     <ul className="photo-list">
