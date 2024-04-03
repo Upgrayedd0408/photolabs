@@ -8,8 +8,6 @@ const PhotoFavButton = (props) => {
 
   const handleClick = () => {
     favPhoto();
-    console.log("clicked!");
-    console.log(fav);
   };
 
   return (
