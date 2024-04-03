@@ -5,7 +5,7 @@ import TopNavigationBar from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
 import { useState } from "react";
 
-const HomeRoute = () => {
+const HomeRoute = (props) => {
 
   const [fav, setFav] = useState(false);
 
@@ -17,10 +17,11 @@ const HomeRoute = () => {
     }
   };
 
+
   return (
     <div className="home-route">
-      <TopNavigationBar fav={fav} />
-      <PhotoList fav={fav} favPhoto={favPhoto} />
+      <TopNavigationBar fav={fav} topics={props.topics} />
+      <PhotoList fav={fav} favPhoto={favPhoto} photos={props.photos}/>
     </div>
   );
 };
