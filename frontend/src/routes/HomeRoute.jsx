@@ -7,21 +7,20 @@ import { useState } from "react";
 
 const HomeRoute = (props) => {
 
-  const [fav, setFav] = useState(false);
+  const [isFavouritePhoto, setIsFavouritePhoto] = useState({});
 
-  const favPhoto = () => {
-    if (fav) {
-      setFav(false);
-    } else {
-      setFav(true);
-    }
+  const favouritePhoto = (photoId) => {
+    setIsFavouritePhoto(prevIsFavouritePhoto => ({
+      ...prevIsFavouritePhoto,
+      [photoId]: !prevIsFavouritePhoto[photoId]
+    }));
   };
 
 
   return (
     <div className="home-route">
-      <TopNavigationBar fav={fav} topics={props.topics} />
-      <PhotoList fav={fav} favPhoto={favPhoto} photos={props.photos}/>
+      <TopNavigationBar isFavouritePhoto={isFavouritePhoto} topics={props.topics} />
+      <PhotoList isFavouritePhoto={isFavouritePhoto} favouritePhoto={favouritePhoto} photos={props.photos}/>
     </div>
   );
 };

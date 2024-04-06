@@ -6,14 +6,11 @@ import PhotoListItem from "./PhotoListItem";
 
 
 const PhotoList = (props) => {
-  const { fav, favPhoto } = props;
+  const { isFavouritePhoto, favouritePhoto } = props;
   const { photos } = props;
 
-  /* How come I only use props to assign { photos } and not props.photos. When I do that it tells me photos is undefined. */
 
-
-
-  const listOfPhotos = photos.map((photo) => <PhotoListItem key={photo.id} photo={photo} fav={fav} favPhoto={favPhoto} />);
+  const listOfPhotos = photos.map((photo) => <PhotoListItem key={photo.id} photo={photo} isFavouritePhoto={isFavouritePhoto/* [photo.id] */ || false} toggleFavourite={() => favouritePhoto(photo.id)} />);
 
   return (
     <ul className="photo-list">
