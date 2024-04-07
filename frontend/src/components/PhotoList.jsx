@@ -6,11 +6,11 @@ import PhotoListItem from "./PhotoListItem";
 
 
 const PhotoList = (props) => {
-  const { isFavouritePhoto, favouritePhoto, toggleModal } = props;
+  const { isFavouritePhoto, favouritePhoto, displayPhotoModal } = props;
   const { photos } = props;
 
 
-  const listOfPhotos = photos.map((photo) => <PhotoListItem key={photo.id} photo={photo} isFavouritePhoto={isFavouritePhoto || false} toggleFavourite={() => favouritePhoto(photo.id)} toggleModal={toggleModal} />);
+  const listOfPhotos = photos.map((photo) => <PhotoListItem key={photo.id} photo={photo} isFavouritePhoto={isFavouritePhoto || false} toggleFavourite={() => favouritePhoto(photo.id)} displayPhotoModal={displayPhotoModal} />);
 
   return (
     <ul className="photo-list">

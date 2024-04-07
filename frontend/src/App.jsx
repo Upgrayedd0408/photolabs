@@ -12,7 +12,7 @@ const App = () => {
 
   const [modalDisplayed, setModalDisplayed] = useState(false);
 
-  const toggleModal = () => {
+  const displayPhotoModal = () => {
     if (modalDisplayed) {
       setModalDisplayed(false);
     } else {
@@ -22,8 +22,8 @@ const App = () => {
   
   return (
     <div className="App">
-      <HomeRoute topics={topics} photos={photos} modalDisplayed={modalDisplayed} toggleModal={toggleModal} />
-      {modalDisplayed && <PhotoDetailsModal />}
+      <HomeRoute topics={topics} photos={photos} modalDisplayed={modalDisplayed} displayPhotoModal={displayPhotoModal} />
+      {modalDisplayed && <PhotoDetailsModal displayPhotoModal={displayPhotoModal} />}
     </div>
   );
 };

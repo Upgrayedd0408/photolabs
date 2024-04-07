@@ -9,10 +9,10 @@ import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
   const { id, location, urls, user } = props.photo;
-  const { isFavouritePhoto, toggleFavourite, toggleModal } = props;
+  const { isFavouritePhoto, toggleFavourite, displayPhotoModal } = props;
 
   const handleClick = () => {
-    toggleModal(id);
+    displayPhotoModal(id);
     console.log(`Displaying modal for photo ${id}`);
   };
 
