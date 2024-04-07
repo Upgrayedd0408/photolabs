@@ -11,24 +11,19 @@ const HomeRoute = (props) => {
 
   const favouritePhoto = (photoId) => {
     setIsFavouritePhoto(prevIsFavouritePhoto => ({
-      ...prevIsFavouritePhoto,
-      [photoId]: !prevIsFavouritePhoto[photoId]
+      ...prevIsFavouritePhoto, //spreads the existing isFavouritePhoto Object
+      [photoId]: !prevIsFavouritePhoto[photoId] // Adds the new photoId that is passed into the function and if it doesn't already exist, it is set to true.
     }));
   };
 
-  let favouriteCount = 0;
-
-  for (const photo in isFavouritePhoto) {
-    if (Object.prototype.hasOwnProperty.call(isFavouritePhoto, photo) && isFavouritePhoto[photo]) {
-      favouriteCount++;
-    }
-  }
+  // Keep track of how many photos have been added to the favourite list. This creates an array of the values from the isFavouritePhoto Object and provides the array length. essentially counting them.
+  let favouriteCount = Object.values(isFavouritePhoto).filter(isFav => isFav).length;
 
 
   return (
     <div className="home-route">
       <TopNavigationBar isFavouritePhoto={isFavouritePhoto} topics={props.topics} favouriteCount={favouriteCount}/>
-      <PhotoList isFavouritePhoto={isFavouritePhoto} favouritePhoto={favouritePhoto} photos={props.photos}/>
+      <PhotoList isFavouritePhoto={isFavouritePhoto} favouritePhoto={favouritePhoto} photos={props.photos} toggleModal={props.toggleModal} />
     </div>
   );
 };
