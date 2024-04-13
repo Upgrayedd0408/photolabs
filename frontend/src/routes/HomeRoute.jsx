@@ -7,7 +7,9 @@ import { useState } from "react";
 
 const HomeRoute = (props) => {
 
-  const [isFavouritePhoto, setIsFavouritePhoto] = useState({});
+  const { isFavouritePhoto, favouritePhoto, favouriteCount } = props;
+
+  /*   const [isFavouritePhoto, setIsFavouritePhoto] = useState({});
 
   const favouritePhoto = (photoId) => {
     setIsFavouritePhoto(prevIsFavouritePhoto => ({
@@ -17,7 +19,7 @@ const HomeRoute = (props) => {
   };
 
   // Keep track of how many photos have been added to the favourite list. This creates an array of the values from the isFavouritePhoto Object and provides the array length. essentially counting them.
-  let favouriteCount = Object.values(isFavouritePhoto).filter(isFav => isFav).length;
+  let favouriteCount = Object.values(isFavouritePhoto).filter(isFav => isFav).length; */
 
 
   return (

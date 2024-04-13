@@ -9,18 +9,20 @@ import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
   const { id, location, urls, user } = props.photo;
-  const { isFavouritePhoto, toggleFavourite, displayPhotoModal } = props;
+  const { isFavouritePhoto, toggleFavourite, displayPhotoModal, displayMode } = props;
 
   const handleClick = () => {
     displayPhotoModal(id);
     console.log(`Displaying modal for photo ${id}`);
   };
 
+  const imageClassName = displayMode === 'Modal' ? 'photo-details-modal__image' : 'photo-list__image';
+
   return (
     <div className="photo-list__item">
       <PhotoFavButton photoId={id} isFavouritePhoto={isFavouritePhoto} toggleFavourite={toggleFavourite} />
       <div className="photo-list__user-details">
-        <img src={urls.regular} className="photo-list__image" onClick={handleClick} />
+        <img src={urls.regular} className={imageClassName} onClick={handleClick} />
         <div className="photo-list__user-details2">
           <img src={user.profile} className="photo-list__user-profile" />
           <div className="photo-list__user-details">
@@ -36,6 +38,9 @@ const PhotoListItem = (props) => {
     </div>
   );
 };
+
+
+
 
 
 export default PhotoListItem;
