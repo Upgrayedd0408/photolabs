@@ -1,48 +1,63 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import photos from "mocks/photos";
 
 const useApplicationData = () => {
 
-  const [isFavouritePhoto, setIsFavouritePhoto] = useState({});
-  
-  const favouritePhoto = (photoId) => {
-    setIsFavouritePhoto(prevIsFavouritePhoto => ({
-      ...prevIsFavouritePhoto, //spreads the existing isFavouritePhoto Object
-      [photoId]: !prevIsFavouritePhoto[photoId] // Adds the new photoId that is passed into the function and if it doesn't already exist, it is set to true.
-    }));
+  const actions = {
+    FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
+    DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
+    CLOSE_MODAL: 'CLOSE_MODAL'
   };
-  
+
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+    case 'FAV_PHOTO_ADDED':
+      return { ...state, isFavouritePhoto: { ...state.isFavouritePhoto, [action.payload]: !state.isFavouritePhoto[action.payload] } };
+    case 'DISPLAY_PHOTO_DETAILS':
+      return { ...state, modalDisplayed: {displayed: true, selectedPhoto: action.payload} };
+    case 'CLOSE_MODAL':
+      return { ...state, modalDisplayed: {displayed: false, selectedPhoto: null }};
+    }
+  };
+
+  const initialState = {
+    isFavouritePhoto: {},
+    modalDisplayed: {
+      displayed: false,
+      selectedPhoto: null
+    },
+  };
+
+
+  const [state, dispatch] = useReducer(reducer, initialState);
   // Keep track of how many photos have been added to the favourite list. This creates an array of the values from the isFavouritePhoto Object and provides the array length. essentially counting them.
-  let favouriteCount = Object.values(isFavouritePhoto).filter(isFav => isFav).length;
-  
-  
-  const [modalDisplayed, setModalDisplayed] = useState({ displayed: false, selectedPhoto: null });
-  
-  
-  
-  const closeModal = () => {
-    setModalDisplayed({ displayed: false, selectedPhoto: null });
-    console.log(modalDisplayed);
+  let favouriteCount = Object.values(state.isFavouritePhoto).filter(isFav => isFav).length;
+
+
+  const favouritePhoto = (photoId) => {
+    dispatch({ type: actions.FAV_PHOTO_ADDED, payload: photoId });
   };
-  
+
+  const closeModal = () => {
+    dispatch({ type: actions.CLOSE_MODAL });
+  };
+
   const displayPhotoModal = (photoId) => {
     const selectedPhoto = photos.find(photo => photo.id === photoId);
-  
+
     if (selectedPhoto) {
-      console.log(selectedPhoto);
-      setModalDisplayed({ displayed: !modalDisplayed.displayed, selectedPhoto: selectedPhoto});
+      dispatch({ type: actions.DISPLAY_PHOTO_DETAILS, payload: selectedPhoto});
     } else {
-      setModalDisplayed({ displayed: false, selectedPhoto: null});
+      closeModal();
     }
   };
 
   return {
-    isFavouritePhoto,
-    setIsFavouritePhoto,
+    isFavouritePhoto: state.isFavouritePhoto,
     favouritePhoto,
     favouriteCount,
-    modalDisplayed,
-    setModalDisplayed,
+    modalDisplayed: state.modalDisplayed,
     closeModal,
     displayPhotoModal
   };
