@@ -14,7 +14,6 @@ const PhotoDetailsModal = (props) => {
   };
 
   const similarPhotosArray = Object.values(photo.similar_photos);
-  console.log(similarPhotosArray);
 
 
   return (

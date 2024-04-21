@@ -1,12 +1,14 @@
-import { useReducer, useState } from "react";
-import photos from "mocks/photos";
+import { useReducer, useEffect } from "react";
+
 
 const useApplicationData = () => {
 
   const actions = {
     FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
     DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
-    CLOSE_MODAL: 'CLOSE_MODAL'
+    CLOSE_MODAL: 'CLOSE_MODAL',
+    SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+    SET_TOPIC_DATA: 'SET_TOPIC_DATA'
   };
 
 
@@ -15,9 +17,15 @@ const useApplicationData = () => {
     case 'FAV_PHOTO_ADDED':
       return { ...state, isFavouritePhoto: { ...state.isFavouritePhoto, [action.payload]: !state.isFavouritePhoto[action.payload] } };
     case 'DISPLAY_PHOTO_DETAILS':
-      return { ...state, modalDisplayed: {displayed: true, selectedPhoto: action.payload} };
+      return { ...state, modalDisplayed: { displayed: true, selectedPhoto: action.payload } };
     case 'CLOSE_MODAL':
-      return { ...state, modalDisplayed: {displayed: false, selectedPhoto: null }};
+      return { ...state, modalDisplayed: { displayed: false, selectedPhoto: null } };
+    case 'SET_PHOTO_DATA':
+      return { ...state, photoData: action.payload };
+    case 'SET_TOPIC_DATA':
+      return { ...state, topicData: action.payload };
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
     }
   };
 
@@ -27,7 +35,21 @@ const useApplicationData = () => {
       displayed: false,
       selectedPhoto: null
     },
+    photoData: [],
+    topicData: []
   };
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/photos')
+      .then(response => response.json())
+      .then((data) => dispatch({ type: actions.SET_PHOTO_DATA, payload: data }));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8001/api/topics')
+      .then(response => response.json())
+      .then(data => dispatch({ type: actions.SET_TOPIC_DATA, payload: data }));
+  }, []);
 
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -44,16 +66,17 @@ const useApplicationData = () => {
   };
 
   const displayPhotoModal = (photoId) => {
-    const selectedPhoto = photos.find(photo => photo.id === photoId);
+    const selectedPhoto = state.photoData.find(photo => photo.id === photoId);
 
     if (selectedPhoto) {
-      dispatch({ type: actions.DISPLAY_PHOTO_DETAILS, payload: selectedPhoto});
+      dispatch({ type: actions.DISPLAY_PHOTO_DETAILS, payload: selectedPhoto });
     } else {
       closeModal();
     }
   };
 
   return {
+    state,
     isFavouritePhoto: state.isFavouritePhoto,
     favouritePhoto,
     favouriteCount,
