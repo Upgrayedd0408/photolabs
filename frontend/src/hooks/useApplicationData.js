@@ -8,7 +8,8 @@ const useApplicationData = () => {
     DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS',
     CLOSE_MODAL: 'CLOSE_MODAL',
     SET_PHOTO_DATA: 'SET_PHOTO_DATA',
-    SET_TOPIC_DATA: 'SET_TOPIC_DATA'
+    SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+    GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
   };
 
 
@@ -24,6 +25,8 @@ const useApplicationData = () => {
       return { ...state, photoData: action.payload };
     case 'SET_TOPIC_DATA':
       return { ...state, topicData: action.payload };
+    case 'GET_PHOTOS_BY_TOPICS':
+      return { ...state, photoData: action.payload };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -51,10 +54,27 @@ const useApplicationData = () => {
       .then(data => dispatch({ type: actions.SET_TOPIC_DATA, payload: data }));
   }, []);
 
+  /*   useEffect(() => {
+    if (topicId) {
+      fetch('http://localhost:8001/api/topics/photos/${topicId}')
+        .then(response => response.json())
+        .then(data => dispatch({ type: actions.GET_PHOTOS_BY_TOPICS, payload: data }));
+    }
+  }, [topicId]); */
+
 
   const [state, dispatch] = useReducer(reducer, initialState);
   // Keep track of how many photos have been added to the favourite list. This creates an array of the values from the isFavouritePhoto Object and provides the array length. essentially counting them.
   let favouriteCount = Object.values(state.isFavouritePhoto).filter(isFav => isFav).length;
+
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+      .then(response => response.json())
+      .then(data => {
+        dispatch({ type: 'GET_PHOTOS_BY_TOPICS', payload: data });
+      })
+      .catch(error => console.log(error));
+  };
 
 
   const favouritePhoto = (photoId) => {
@@ -82,7 +102,8 @@ const useApplicationData = () => {
     favouriteCount,
     modalDisplayed: state.modalDisplayed,
     closeModal,
-    displayPhotoModal
+    displayPhotoModal,
+    fetchPhotosByTopic
   };
 };
 

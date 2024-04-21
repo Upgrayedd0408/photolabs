@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const HomeRoute = (props) => {
 
-  const { isFavouritePhoto, favouritePhoto, favouriteCount } = props;
+  const { isFavouritePhoto, favouritePhoto, favouriteCount, fetchPhotosByTopic } = props;
 
   /*   const [isFavouritePhoto, setIsFavouritePhoto] = useState({});
 
@@ -24,8 +24,16 @@ const HomeRoute = (props) => {
 
   return (
     <div className="home-route">
-      <TopNavigationBar isFavouritePhoto={isFavouritePhoto} topics={props.topics} favouriteCount={favouriteCount}/>
-      <PhotoList isFavouritePhoto={isFavouritePhoto} favouritePhoto={favouritePhoto} photos={props.photos} displayPhotoModal={props.displayPhotoModal} />
+      <TopNavigationBar
+        isFavouritePhoto={isFavouritePhoto}
+        topics={props.topics}
+        favouriteCount={favouriteCount}
+        fetchPhotosByTopic={fetchPhotosByTopic} />
+      <PhotoList
+        isFavouritePhoto={isFavouritePhoto}
+        favouritePhoto={favouritePhoto}
+        photos={props.photos}
+        displayPhotoModal={props.displayPhotoModal} />
     </div>
   );
 };

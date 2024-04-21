@@ -17,12 +17,21 @@ const App = () => {
     favouriteCount,
     modalDisplayed,
     closeModal,
-    displayPhotoModal
+    displayPhotoModal,
+    fetchPhotosByTopic
   } = useApplicationData();
   
   return (
     <div className="App">
-      <HomeRoute topics={state.topicData} photos={state.photoData} modalDisplayed={modalDisplayed} displayPhotoModal={displayPhotoModal} favouritePhoto={favouritePhoto} favouriteCount={favouriteCount} isFavouritePhoto={isFavouritePhoto} />
+      <HomeRoute
+        topics={state.topicData}
+        photos={state.photoData}
+        modalDisplayed={modalDisplayed}
+        displayPhotoModal={displayPhotoModal}
+        favouritePhoto={favouritePhoto}
+        favouriteCount={favouriteCount}
+        isFavouritePhoto={isFavouritePhoto}
+        fetchPhotosByTopic={fetchPhotosByTopic} />
       {modalDisplayed.displayed && <PhotoDetailsModal closeModal={closeModal} photo={modalDisplayed.selectedPhoto} isFavouritePhoto={isFavouritePhoto} favouritePhoto={favouritePhoto} displayPhotoModal={displayPhotoModal} modalDisplayed={modalDisplayed} />}
     </div>
   );

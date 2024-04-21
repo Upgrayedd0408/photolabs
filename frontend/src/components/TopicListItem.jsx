@@ -5,11 +5,11 @@ import "../styles/TopicListItem.scss";
 
 const TopicListItem = (props) => {
 
-  const { title } = props.topic;
+  const { topic, fetchPhotosByTopic } = props;
 
   return (
     <div className="topic-list__item" >
-      <span>{title}</span>
+      <span onClick={() => fetchPhotosByTopic(topic.id)}>{topic.title}</span>
     </div>
   );
 };
