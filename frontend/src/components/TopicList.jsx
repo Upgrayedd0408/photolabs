@@ -11,7 +11,12 @@ const TopicList = (props) => {
 
   const { topics } = props;
 
-  const listOfTopics = topics.map((topic) => <TopicListItem key={topic.id} topic={topic} fetchPhotosByTopic={props.fetchPhotosByTopic} />);
+  const listOfTopics = topics.map((topic) =>
+    <TopicListItem
+      key={topic.id}
+      topic={topic}
+      fetchPhotosByTopic={props.fetchPhotosByTopic}
+    />);
 
   return (
     <div className="top-nav-bar__topic-list">

@@ -13,7 +13,7 @@ const App = () => {
   const {
     state,
     isFavouritePhoto,
-    favouritePhoto,
+    addFavouritePhoto,
     favouriteCount,
     modalDisplayed,
     closeModal,
@@ -28,11 +28,19 @@ const App = () => {
         photos={state.photoData}
         modalDisplayed={modalDisplayed}
         displayPhotoModal={displayPhotoModal}
-        favouritePhoto={favouritePhoto}
+        addFavouritePhoto={addFavouritePhoto}
         favouriteCount={favouriteCount}
         isFavouritePhoto={isFavouritePhoto}
         fetchPhotosByTopic={fetchPhotosByTopic} />
-      {modalDisplayed.displayed && <PhotoDetailsModal closeModal={closeModal} photo={modalDisplayed.selectedPhoto} isFavouritePhoto={isFavouritePhoto} favouritePhoto={favouritePhoto} displayPhotoModal={displayPhotoModal} modalDisplayed={modalDisplayed} />}
+      {modalDisplayed.displayed &&
+      <PhotoDetailsModal
+        closeModal={closeModal}
+        photo={modalDisplayed.selectedPhoto}
+        isFavouritePhoto={isFavouritePhoto}
+        addFavouritePhoto={addFavouritePhoto}
+        displayPhotoModal={displayPhotoModal}
+        modalDisplayed={modalDisplayed}
+      />}
     </div>
   );
 };

@@ -54,16 +54,9 @@ const useApplicationData = () => {
       .then(data => dispatch({ type: actions.SET_TOPIC_DATA, payload: data }));
   }, []);
 
-  /*   useEffect(() => {
-    if (topicId) {
-      fetch('http://localhost:8001/api/topics/photos/${topicId}')
-        .then(response => response.json())
-        .then(data => dispatch({ type: actions.GET_PHOTOS_BY_TOPICS, payload: data }));
-    }
-  }, [topicId]); */
-
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  
   // Keep track of how many photos have been added to the favourite list. This creates an array of the values from the isFavouritePhoto Object and provides the array length. essentially counting them.
   let favouriteCount = Object.values(state.isFavouritePhoto).filter(isFav => isFav).length;
 
@@ -77,7 +70,7 @@ const useApplicationData = () => {
   };
 
 
-  const favouritePhoto = (photoId) => {
+  const addFavouritePhoto = (photoId) => {
     dispatch({ type: actions.FAV_PHOTO_ADDED, payload: photoId });
   };
 
@@ -98,7 +91,7 @@ const useApplicationData = () => {
   return {
     state,
     isFavouritePhoto: state.isFavouritePhoto,
-    favouritePhoto,
+    addFavouritePhoto,
     favouriteCount,
     modalDisplayed: state.modalDisplayed,
     closeModal,

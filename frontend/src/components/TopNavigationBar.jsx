@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-
+import React from 'react';
 import '../styles/TopNavigationBar.scss';
 import TopicList from './TopicList';
 import FavBadge from './FavBadge';
@@ -7,8 +6,6 @@ import FavBadge from './FavBadge';
 const TopNavigationBar = (props) => {
 
   const { isFavouritePhoto, favouriteCount } = props;
-
-  
 
   return (
     <div className="top-nav-bar">

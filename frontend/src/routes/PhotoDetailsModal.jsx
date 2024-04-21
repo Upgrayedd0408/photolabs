@@ -7,7 +7,7 @@ import PhotoListItem from 'components/PhotoListItem';
 
 const PhotoDetailsModal = (props) => {
 
-  const { isFavouritePhoto, favouritePhoto, closeModal, photo, displayPhotoModal, modalDisplayed } = props;
+  const { isFavouritePhoto, addFavouritePhoto, closeModal, photo, displayPhotoModal, modalDisplayed } = props;
 
   const handleClick = () => {
     closeModal();
@@ -24,12 +24,12 @@ const PhotoDetailsModal = (props) => {
       <PhotoListItem
         photo={photo}
         isFavouritePhoto={isFavouritePhoto}
-        toggleFavourite={() => favouritePhoto(photo.id)}
+        toggleFavourite={() => addFavouritePhoto(photo.id)}
         isInModal={modalDisplayed.displayed}
         displayMode={'Modal'}/>
       <PhotoList
         isFavouritePhoto={isFavouritePhoto}
-        favouritePhoto={favouritePhoto}
+        addFavouritePhoto={addFavouritePhoto}
         photos={similarPhotosArray}
         isInModal={modalDisplayed.displayed}
         displayPhotoModal={displayPhotoModal}

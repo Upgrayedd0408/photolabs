@@ -13,7 +13,6 @@ const PhotoListItem = (props) => {
 
   const handleClick = () => {
     displayPhotoModal(id);
-    console.log(`Displaying modal for photo ${id}`);
   };
 
   const imageClassName = displayMode === 'Modal' ? 'photo-details-modal__image' : 'photo-list__image';
