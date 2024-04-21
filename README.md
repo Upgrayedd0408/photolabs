@@ -23,4 +23,11 @@ npm start
 ```
 
 ## Screenshots
-![Screenshot of the main page]()
+![Screenshot of the main page](https://github.com/Upgrayedd0408/photolabs/blob/main/assets/images/main_page.png)
+
+![Screenshot of main page showing some photos that are liked](https://github.com/Upgrayedd0408/photolabs/blob/main/assets/images/main_page_with_liked_photos.png)
+
+![Screenshot of the photo in the modal view](https://github.com/Upgrayedd0408/photolabs/blob/main/assets/images/photo_in_modal_view.png)
+
+![Screenshot of the photos being filtered by Nature topic](https://github.com/Upgrayedd0408/photolabs/blob/main/assets/images/photos_with_nature_filter.png)
+
